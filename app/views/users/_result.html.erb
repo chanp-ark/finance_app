@@ -1,0 +1,24 @@
+<div class="results-block">
+    <%= render 'layouts/messages' %>
+</div>
+
+<% if @stock %>
+    <div class="card card-header results-block col-9">
+        <strong>Symbol: </strong> <%= @stock.ticker %>
+        <strong>Name: </strong> <%= @stock.name %>
+        <strong>Closing: </strong> <%= @stock.last_price %>
+        <strong>Current: </strong> <%= @stock.current_price %>
+        <% if @stock.dividend_yield %>
+            <strong>Dividend Yield: </strong> <%= @stock.dividend_yield.round(6) %>
+            <strong>Ex. Dividend Date: </strong> <%= @stock.ex_dividend_date %>
+        <% end %>
+        <% if current_user.can_track_stock?(@stock.ticker) %>
+            <%= link_to 'Add to portfolio', user_stocks_path(user: current_user, ticker: @stock.ticker), class: 'btn btn-sx btn-success', method: :post =%>
+        <% else %>
+            <span class="badge badge-secondary">
+                You are already tracking this stock
+            </span>
+
+        <% end %>
+    </div>
+<% end %>
