@@ -16,9 +16,9 @@ class Stock < ApplicationRecord
             new(ticker: ticker_symbol, 
                 name: client.company(ticker_symbol).company_name, 
                 last_price: client.ohlc(ticker_symbol).close.price,
-                dividend_yield: client.key_stats(ticker_symbol).dividend_yield,
-                ex_dividend_date: client.key_stats(ticker_symbol).ex_dividend_date,
-                current_price: client.quote(ticker_symbol).latest_price
+                # dividend_yield: client.key_stats(ticker_symbol).dividend_yield,
+                # ex_dividend_date: client.key_stats(ticker_symbol).ex_dividend_date,
+                # current_price: client.quote(ticker_symbol).latest_price
             )
         rescue => exception
             return nil
